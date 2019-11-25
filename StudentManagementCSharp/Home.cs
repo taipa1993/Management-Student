@@ -128,7 +128,10 @@ namespace StudentManagementCSharp
             ShowStudent();
         }
 
-        
+        private void lViewStudent_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
     
 }

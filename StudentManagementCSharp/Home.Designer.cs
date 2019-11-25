@@ -116,6 +116,7 @@
             this.lViewStudent.TabIndex = 6;
             this.lViewStudent.UseCompatibleStateImageBehavior = false;
             this.lViewStudent.View = System.Windows.Forms.View.Details;
+            this.lViewStudent.SelectedIndexChanged += new System.EventHandler(this.lViewStudent_SelectedIndexChanged);
             // 
             // No
             // 
