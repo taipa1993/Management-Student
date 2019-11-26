@@ -3,47 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentManagementCSharp.BusinessObject;
 
 namespace StudentManagementCSharp
 {
     internal class Student
     {
-        string id;
-        string name;
-        int year;
-        string address;
-        Province province;
-        District district;
-        Commune commune;
-        string mobile;
+        private static int count = 0;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Year { get; set; }
+        public string Address { get; set; }
+        public Province Province { get; set; }
+        public District  District { get; set; }
+        public Commune Commune { get; set; }
+        public string Mobile { get; set; }
+
         public Student()
         {
-                
+            count++;
         }
-        public Student(string id, string name, int year, string address,
-            Province province, District district, Commune commune, string mobile)
+     
+        public Student( string name, int year, string address,
+            Province province, District district, Commune commune, string mobie)
         {
-            this.Id = id;
-            this.Name = name;
-            this.Year = year;
-            this.Address = address;
-            this.Province = province;
-            this.Dictrict = district;
-            this.Commune = commune;
-            this.Mobile = mobile;
+            Id = count++;
+            Name = name;
+            Year = year;
+            Address = address;
+            Province = province;
+            District = district;
+            Commune = commune;
+            Mobile = mobie;
         }
-
-        public string Id { get => id; set => id = value; }
-        public string Name { get => name; set => name = value; }
-        public int Year { get => year; set => year = value; }
-        public string Address { get => address; set => address = value; }
-        public string Mobile { get => mobile; set => mobile = value; }
-        internal Province Province { get => province; set => province = value; }
-        internal District Dictrict { get => district; set => district = value; }
-        internal Commune Commune { get => commune; set => commune = value; }
         public string AddressToString()
         {
-            return address + ", " +commune.ToString() + ", " + district.ToString();
+            return Address +", "+ Commune.Name + ", " + District.Name + ", " + Province.Name;
         }
     }
 }

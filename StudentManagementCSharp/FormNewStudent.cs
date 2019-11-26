@@ -8,41 +8,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Linq;
+using StudentManagementCSharp.BusinessObject;
 
 namespace StudentManagementCSharp
 {
     public partial class FormNewStudent : Form
     {
-        string id, name, address, mobie;
+        string  name, address, mobie;
         Province province;
         District district;
         Commune commune;
-        List<Province> listProvince;
-        List<District> listDistric;
-        List<Commune> listCommune;
+        List<Province> listProvince;     
         int indexStudent;
-        int index;
-
         int year;
         public FormNewStudent()
         {
+            this.Text = "New Student";
             Student student = new Student();
             InitializeComponent();
             listProvince = Home.listProvince;
             comboxBoxProvince.DataSource = listProvince;
             comboxBoxProvince.DisplayMember = "name";
             indexStudent = Home.indexStudent;
-
+            
             if (indexStudent >= 0)
             {
+                this.Text = "Edit Student ";
                 student = Home.listStudent[indexStudent];
                 txtName.Text = student.Name;
                 txtYear.Text = student.Year.ToString();
                 txtAddress.Text = student.Address;
-                comboxBoxProvince.Text = student.Province.ToString();
-                comboBoxDistrict.Text = student.Dictrict.ToString();
-                comboBoxCommune.Text = student.Commune.ToString();
+                comboxBoxProvince.Text = student.Province.Name;
+                comboBoxDistrict.Text = student.District.Name;
+                comboBoxCommune.Text = student.Commune.Name;
                 txtMobile.Text = student.Mobile;
             }
         }
@@ -51,8 +49,8 @@ namespace StudentManagementCSharp
         {
             ComboBox cbDistrict = (ComboBox)sender;
             district = (District)cbDistrict.SelectedItem;
-            listCommune = Home.listCommune.Where(c => c.District == district).ToList();
-            comboBoxCommune.DataSource = listCommune;
+            district = province.Districts.First(d => d == district);
+            comboBoxCommune.DataSource = district.Communes;
             comboBoxCommune.DisplayMember = "name";
         }
 
@@ -60,14 +58,14 @@ namespace StudentManagementCSharp
         {
             ComboBox cbProvine = (ComboBox)sender;
             province = (Province)cbProvine.SelectedItem;
-            listDistric = Home.listDistrict.Where(d => d.Province == province).ToList();
-            comboBoxDistrict.DataSource = listDistric;
+            province = listProvince.First(p => p == province);
+            comboBoxDistrict.DataSource = province.Districts;
             comboBoxDistrict.DisplayMember = "name";
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            id = "  ";
+            
             name = txtName.Text.Trim();
             address = txtAddress.Text.Trim();
             province = (Province)comboxBoxProvince.SelectedItem;
@@ -75,16 +73,12 @@ namespace StudentManagementCSharp
             commune = (Commune)comboBoxCommune.SelectedItem;
             mobie = txtMobile.Text.Trim();
             int.TryParse(txtYear.Text.Trim(), out year);
-            Student newStudent = new Student(id, name, year, address, province, district, commune, mobie);
-            index = Home.listStudent.FindIndex(s => s.Id ==id);
-            if(index>= 0)
-            {
-                MessageBox.Show("id is exist. Please change");
-            }
+            Student newStudent = new Student( name, year, address, province, district, commune, mobie);            
 
             if (Home.indexStudent >= 0)
             {
                 Home.listStudent[Home.indexStudent] = newStudent;
+                MessageBox.Show("Updated success");
             }
             else
             {

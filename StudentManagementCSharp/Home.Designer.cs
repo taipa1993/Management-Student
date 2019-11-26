@@ -50,7 +50,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(30, 31);
+            this.label1.Location = new System.Drawing.Point(30, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 16);
             this.label1.TabIndex = 0;
@@ -67,7 +67,7 @@
             // 
             this.btnSearch.Location = new System.Drawing.Point(543, 22);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(93, 28);
+            this.btnSearch.Size = new System.Drawing.Size(100, 30);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -77,7 +77,7 @@
             // 
             this.btnSoftByName.Location = new System.Drawing.Point(26, 73);
             this.btnSoftByName.Name = "btnSoftByName";
-            this.btnSoftByName.Size = new System.Drawing.Size(128, 32);
+            this.btnSoftByName.Size = new System.Drawing.Size(100, 30);
             this.btnSoftByName.TabIndex = 3;
             this.btnSoftByName.Text = "Soft by Name";
             this.btnSoftByName.UseVisualStyleBackColor = true;
@@ -85,9 +85,9 @@
             // 
             // btnSoftByYear
             // 
-            this.btnSoftByYear.Location = new System.Drawing.Point(194, 73);
+            this.btnSoftByYear.Location = new System.Drawing.Point(180, 73);
             this.btnSoftByYear.Name = "btnSoftByYear";
-            this.btnSoftByYear.Size = new System.Drawing.Size(128, 32);
+            this.btnSoftByYear.Size = new System.Drawing.Size(100, 30);
             this.btnSoftByYear.TabIndex = 4;
             this.btnSoftByYear.Text = "Soft by Year";
             this.btnSoftByYear.UseVisualStyleBackColor = true;
@@ -97,7 +97,7 @@
             // 
             this.btnAdd.Location = new System.Drawing.Point(543, 73);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(128, 32);
+            this.btnAdd.Size = new System.Drawing.Size(100, 30);
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Add New";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -105,8 +105,10 @@
             // 
             // dGView
             // 
+            this.dGView.AllowUserToAddRows = false;
             this.dGView.AllowUserToOrderColumns = true;
             this.dGView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dGView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dGView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.noColumn,
@@ -118,10 +120,10 @@
             this.editColumn,
             this.deleteColumn});
             this.dGView.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.dGView.Location = new System.Drawing.Point(12, 141);
+            this.dGView.Location = new System.Drawing.Point(12, 140);
             this.dGView.Name = "dGView";
             this.dGView.ReadOnly = true;
-            this.dGView.Size = new System.Drawing.Size(698, 312);
+            this.dGView.Size = new System.Drawing.Size(752, 312);
             this.dGView.TabIndex = 6;
             this.dGView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGView_CellContentClick);
             // 
@@ -138,6 +140,7 @@
             this.idColumn.Name = "idColumn";
             this.idColumn.ReadOnly = true;
             this.idColumn.Visible = false;
+            this.idColumn.Width = 40;
             // 
             // name
             // 
@@ -186,7 +189,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(710, 450);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(767, 455);
             this.Controls.Add(this.dGView);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnSoftByYear);
