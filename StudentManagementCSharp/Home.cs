@@ -18,18 +18,17 @@ namespace StudentManagementCSharp
         internal static List<Student> listStudent = new List<Student>();
         internal static List<Province> listProvince = new List<Province>();
         internal static int indexStudent = -1;
+        int soft = 0;
         public Home()
         {
-            Load();
+            LoadData();
             InitializeComponent();            
             ShowStudent(listStudent);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string search = txtSearch.Text.Trim().ToLower();
-            List<Student> listSearch = listStudent.Where(s => s.Name.ToLower().Contains(search)).ToList();
-            ShowStudent(listSearch);
+            SearchStudent();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -57,14 +56,32 @@ namespace StudentManagementCSharp
 
         private void btnSoftByName_Click(object sender, EventArgs e)
         {
-            listStudent = listStudent.OrderBy(s => s.Name).ToList();
+            if(soft == 1)
+            {
+                listStudent = listStudent.OrderByDescending(s => s.Name).ToList();
+                soft = 0;
+            }
+            else
+            {
+                listStudent = listStudent.OrderBy(s => s.Name).ToList();
+                soft = 1;
+            }
             ShowStudent(listStudent);
         }
 
 
         private void btnSoftByYear_Click(object sender, EventArgs e)
         {
-            listStudent = listStudent.OrderBy(s => s.Year).ToList();
+            if (soft == 1)
+            {
+                listStudent = listStudent.OrderByDescending(s => s.Year).ToList();
+                soft = 0;
+            }
+            else
+            {
+                listStudent = listStudent.OrderBy(s => s.Year).ToList();
+                soft = 1;
+            }
             ShowStudent(listStudent);
         }
 
@@ -95,7 +112,7 @@ namespace StudentManagementCSharp
                 }
             }
         }
-        private void Load()
+        private void LoadData()
         {
 
             PrepareProvinceData();
@@ -185,6 +202,23 @@ namespace StudentManagementCSharp
             }
         }
 
+        
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                string search = txtSearch.Text.Trim().ToLower();
+                List<Student> listSearch = listStudent.Where(s => s.Name.ToLower().Contains(search)).ToList();
+                ShowStudent(listSearch);
+            }
+        }
+        private void SearchStudent()
+        {
+            string search = txtSearch.Text.Trim().ToLower();
+            List<Student> listSearch = listStudent.Where(s => s.Name.ToLower().Contains(search)).ToList();
+            ShowStudent(listSearch);
+        }
     }
 
 }

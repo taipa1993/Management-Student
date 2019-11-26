@@ -50,7 +50,6 @@
     <Compile Include="BusinessObject\Commune.cs" />
     <Compile Include="BusinessObject\District.cs" />
     <Compile Include="BusinessObject\Province.cs" />
-    <Compile Include="CompareStudent.cs" />
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>

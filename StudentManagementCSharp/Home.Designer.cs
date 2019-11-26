@@ -62,6 +62,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(282, 20);
             this.txtSearch.TabIndex = 1;
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
             // btnSearch
             // 
@@ -120,10 +121,10 @@
             this.editColumn,
             this.deleteColumn});
             this.dGView.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.dGView.Location = new System.Drawing.Point(12, 140);
+            this.dGView.Location = new System.Drawing.Point(12, 128);
             this.dGView.Name = "dGView";
             this.dGView.ReadOnly = true;
-            this.dGView.Size = new System.Drawing.Size(752, 312);
+            this.dGView.Size = new System.Drawing.Size(752, 324);
             this.dGView.TabIndex = 6;
             this.dGView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGView_CellContentClick);
             // 
@@ -189,6 +190,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(767, 455);
             this.Controls.Add(this.dGView);
