@@ -64,32 +64,35 @@ namespace StudentManagementCSharp
 
         private void btnSoftByYear_Click(object sender, EventArgs e)
         {
-            listStudent.Sort(CompareStudent.ComparisonByYear);
+            listStudent = listStudent.OrderBy(s => s.Year).ToList();
             ShowStudent(listStudent);
         }
 
         private void dGView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int id = int.Parse(dGView.Rows[e.RowIndex].Cells[1].FormattedValue.ToString());
-            if (e.ColumnIndex == 7)
+            if (e.RowIndex >= 0)
             {
-
-                indexStudent = listStudent.FindIndex(s => s.Id == id);
-                DialogResult result = MessageBox.Show("Are you sure want to delete this student ?"
-                    , "Caption", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
+                int id = int.Parse(dGView.Rows[e.RowIndex].Cells[1].FormattedValue.ToString());
+                if (e.ColumnIndex == 7)
                 {
-                    listStudent.RemoveAt(indexStudent);
+
+                    indexStudent = listStudent.FindIndex(s => s.Id == id);
+                    DialogResult result = MessageBox.Show("Are you sure want to delete this student ?"
+                        , "Caption", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        listStudent.RemoveAt(indexStudent);
+                        ShowStudent(listStudent);
+                    }
+                }
+                else if (e.ColumnIndex == 6)
+                {
+                    indexStudent = 0;
+                    indexStudent = listStudent.FindIndex(s => s.Id == id);
+                    var newForm = new FormNewStudent();
+                    newForm.ShowDialog();
                     ShowStudent(listStudent);
                 }
-            }
-            else if (e.ColumnIndex == 6)
-            {
-                indexStudent = 0;
-                indexStudent = listStudent.FindIndex(s => s.Id == id);
-                var newForm = new FormNewStudent();
-                newForm.ShowDialog();
-                ShowStudent(listStudent);
             }
         }
         private void Load()

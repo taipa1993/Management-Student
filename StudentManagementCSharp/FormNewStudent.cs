@@ -74,17 +74,21 @@ namespace StudentManagementCSharp
             mobie = txtMobile.Text.Trim();
             int.TryParse(txtYear.Text.Trim(), out year);
             Student newStudent = new Student( name, year, address, province, district, commune, mobie);            
-
-            if (Home.indexStudent >= 0)
+            if(name == "")
+            {
+                MessageBox.Show("Please enter student name ");
+            }else if (Home.indexStudent >= 0)
             {
                 Home.listStudent[Home.indexStudent] = newStudent;
                 MessageBox.Show("Updated success");
+                this.Close();
             }
             else
             {
                 Home.listStudent.Add(newStudent);
+                this.Close();
             }
-            this.Close();
+            
         }
     }
 }
