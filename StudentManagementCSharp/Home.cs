@@ -23,8 +23,7 @@ namespace StudentManagementCSharp
         {
             LoadData();
             InitializeComponent();
-            //ShowStudent(listStudent);
-            ShowList(listStudent);
+            ShowStudent(listStudent);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -40,29 +39,33 @@ namespace StudentManagementCSharp
             ShowStudent(listStudent);
         }
 
-        internal void ShowStudent(List<Student> listShow)
-        {
-            dGView.Rows.Clear();
-            int value = 0;
-            foreach (Student item in listShow)
-            {
-                string noValue = (value++).ToString();
-                string[] row = new string[] {noValue,item.Id.ToString(),item.Name,item.Year.ToString(),
-                    item.AddressFull,item.Mobile,"Edit","Delete" };
-                dGView.Rows.Add(row);
-            }
-        }
+        //internal void ShowStudent(List<Student> listShow)
+        //{
+        //    dGView.Rows.Clear();
+        //    int value = 0;
+        //    foreach (Student item in listShow)
+        //    {
+        //        string noValue = (value++).ToString();
+        //        string[] row = new string[] {noValue,item.Id.ToString(),item.Name,item.Year.ToString(),
+        //            item.AddressFull,item.Mobile,"Edit","Delete" };
+        //        dGView.Rows.Add(row);
+        //    }
+        //}
 
-        internal  void ShowList(List<Student> listShow)
+        internal  void ShowStudent(List<Student> listShow)
         {
-
+            int value =0;
             var show = from Student in listShow
                        select new
-                       {Student.Id, Student.Name, Student.Year,Student.AddressFull,
-                           Student.Mobile,edit = "edit", delete ="delete"
+                       { No = value++ ,Student.Id, Student.Name, Student.Year,Student.AddressFull,
+                           Student.Mobile,Edit = "edit", Delete ="delete"
                        };
-            dGView.DataSource = show.ToList();
-            //dGView.Columns[""]
+            dGView.Columns.Clear();
+            dGView.DataSource = show;
+            dGView.Columns[1].Visible = false;
+            dGView.Columns[4].HeaderText = "Address";
+            dGView.Columns[5].HeaderText = "Mobile Phone";
+            dGView.AutoSize = true;
         }
 
         private void btnSoftByName_Click(object sender, EventArgs e)
