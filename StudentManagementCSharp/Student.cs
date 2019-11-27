@@ -15,16 +15,18 @@ namespace StudentManagementCSharp
         public int Year { get; set; }
         public string Address { get; set; }
         public Province Province { get; set; }
-        public District  District { get; set; }
+        public District District { get; set; }
         public Commune Commune { get; set; }
         public string Mobile { get; set; }
 
+        public string AddressFull
+        { get; set; }
         public Student()
         {
             count++;
         }
-     
-        public Student( string name, int year, string address,
+
+        public Student(string name, int year, string address,
             Province province, District district, Commune commune, string mobie)
         {
             Id = count++;
@@ -35,10 +37,12 @@ namespace StudentManagementCSharp
             District = district;
             Commune = commune;
             Mobile = mobie;
-        }
+            AddressFull = Address + ", " + Commune.Name + ", " + District.Name + ", " + Province.Name;
+            }
+        
         public string AddressToString()
         {
-            return Address +", "+ Commune.Name + ", " + District.Name + ", " + Province.Name;
+            return Address + ", " + Commune.Name + ", " + District.Name + ", " + Province.Name;
         }
     }
 }

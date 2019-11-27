@@ -137,6 +137,7 @@
             // 
             // idColumn
             // 
+            this.idColumn.DataPropertyName = "Student.Id";
             this.idColumn.HeaderText = "id";
             this.idColumn.Name = "idColumn";
             this.idColumn.ReadOnly = true;

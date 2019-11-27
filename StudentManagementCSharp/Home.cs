@@ -22,8 +22,9 @@ namespace StudentManagementCSharp
         public Home()
         {
             LoadData();
-            InitializeComponent();            
-            ShowStudent(listStudent);
+            InitializeComponent();
+            //ShowStudent(listStudent);
+            ShowList(listStudent);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -47,12 +48,22 @@ namespace StudentManagementCSharp
             {
                 string noValue = (value++).ToString();
                 string[] row = new string[] {noValue,item.Id.ToString(),item.Name,item.Year.ToString(),
-                    item.AddressToString(),item.Mobile,"Edit","Delete" };
-
+                    item.AddressFull,item.Mobile,"Edit","Delete" };
                 dGView.Rows.Add(row);
             }
         }
 
+        internal  void ShowList(List<Student> listShow)
+        {
+
+            var show = from Student in listShow
+                       select new
+                       {Student.Id, Student.Name, Student.Year,Student.AddressFull,
+                           Student.Mobile,edit = "edit", delete ="delete"
+                       };
+            dGView.DataSource = show.ToList();
+            //dGView.Columns[""]
+        }
 
         private void btnSoftByName_Click(object sender, EventArgs e)
         {
@@ -87,9 +98,10 @@ namespace StudentManagementCSharp
 
         private void dGView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex>=0)
             {
-                int id = int.Parse(dGView.Rows[e.RowIndex].Cells[1].FormattedValue.ToString());
+                int id;
+                int.TryParse(dGView.Rows[e.RowIndex].Cells[1].FormattedValue.ToString(), out id);
                 if (e.ColumnIndex == 7)
                 {
 
@@ -119,7 +131,7 @@ namespace StudentManagementCSharp
             PrepareDistrictData();
             PrepareCommune();
 
-            Student nhan = new Student("nhan", 1994, "to dan pho so 3",listProvince[0],
+            Student nhan = new Student("nhan", 1994, "so 3",listProvince[0],
                 listProvince[0].Districts[0],listProvince[0].Districts[0].Communes[0], "0123456789");
             listStudent.Add(nhan);
             Student nam = new Student("nam", 1995, "to dan pho 6", listProvince[1],
